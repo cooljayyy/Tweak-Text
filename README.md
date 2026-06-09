@@ -466,7 +466,7 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
 
 Name                         | Contribution                                              | Date       | Reference
 -----------------------------|-----------------------------------------------------------|------------|-----------
-cooljay                      | ---                                                       | xxxx:xx:xx | ---
+cooljay                      | ---                                                       | 2026:06:09 | ---
 xeirh                        | Testing                                                   | 2026       | ---
 treminaor                    | Additional influencers discovery                          | 2024:02:04 | https://wiki.ugx-mods.com/Modding/World-at-War-Modtools/Script/G_FindConfigstringIndex-overflow.html \ https://github.com/UGX-Mods/community-wiki/blob/main/Modding/World-at-War-Modtools/Script/G_FindConfigstringIndex-overflow.html
 EternalHabit/xTurntUpLobbies | Rendition                                                 | 2016:07:13 | https://nextgenupdate.com/forums/black-ops-2-gsc-mods-scripts/916615-gsc-resources.html

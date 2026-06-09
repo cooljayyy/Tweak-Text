@@ -33,7 +33,7 @@ TText_Setup()
 		level.ttext_mode = 0;
 
 	DebugPrint("[tweak-text]: Setup");
-	maps\mp\gametypes\_globallogic_utils::RegisterPostRoundEvent(::TTextRoundSwitch_CB); //Executes each round end.
+	maps\mp\gametypes_zm\_globallogic_utils::RegisterPostRoundEvent(::TTextRoundSwitch_CB); //Executes each round end.
 	level.tstrings_clear_cap = 100; //127-max, ~126-fair, ~100-safe.
 	level.tstrings = []; //Order-dependent.
 	level.tanchors = [];
