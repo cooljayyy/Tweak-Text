@@ -8,7 +8,7 @@
 
   SP is currently unsupported.
 
-### Supported Games
+## Coverage
 
 Game                                    | Date | Codename  | GSC Version | Supported
 ----------------------------------------|------|-----------|-------------|-----------
@@ -43,7 +43,7 @@ Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
 **CoD4x** is unsupported as it provides its own engine side implementation which inhibits this
 script from working.
 
-**IW1/2/3** is unsupported as essential function ``clearalltextafterhudelem()`` is absent.
+**IW1/IW2/T3** is unsupported as essential function ``clearalltextafterhudelem()`` is absent.
 
 **IW6** is unsupported as essential function ``clearalltextafterhudelem()`` is defective.
 PC function is empty.
@@ -53,9 +53,9 @@ Note ``makelocalizedstring()`` can be used to grant an additional ``~1200`` stri
 
 **H1** is unsupported as essential function ``clearalltextafterhudelem()`` is defective.
 PC function is empty. PS4 function doesn't work for ``settext()`` strings due to being 
-"netconststrings" which are permenantly enabled in ship build. Conversely ``setdevtext()`` 
+"netconststrings" which are permanently enabled in ship build. Conversely ``setdevtext()`` 
 strings can be cleared but never appear in configstrings to begin with due to deprecated code
-requiring dev string slots be initialized ``(127)`` which is unnaccesible in ship build.
+requiring dev string slots be initialized ``(127)`` which is inaccessible in ship build.
 Note ``.label`` is also unable to be cleared.
 
 ## Setup
@@ -303,7 +303,7 @@ Note ``.label`` is also unable to be cleared.
   forward-substitution based on command type priority. Variance of this behavior forces
   usage of an approximated clear threshold (``level.tstrings_clear_cap``).
 
-  T6 config-string commands are particularly substituted more aggresively than previous games 
+  T6 config-string commands are particularly substituted more aggressively than previous games 
   (evident in engine code), enabling a stable clear threshold of ``~100`` as opposed to ``~60`` 
   used for T5/T4. Note T6 config-string command ID is ``2`` whilst T5 is ``C``/``d``.
 
@@ -333,13 +333,14 @@ Note ``.label`` is also unable to be cleared.
 
 - Round switch preserves config-strings.
 
----
+### Config-strings Segments
+
+<details>
+<summary>Click to expand</summary>
 
 - Various config-strings segments are subject to overflow beyond just CS_LOCALIZED_STRINGS, 
   however less common. See table bellow.
 
-### Config-strings Segments
-  
 Segment                   | Index | Size    | Influencers                      | Note
 --------------------------|-------|---------|----------------------------------|-----------------
 CS_SYSTEM_INFO            | 0     | 1       | ---                              | ---
@@ -403,6 +404,8 @@ CS_MATCHID                | 2805  | 1       | ---                              |
 
 Empty influencer fields are affected by ``configstrings.csv`` only.
 
+</details>
+
 ## Design Notes
 
 - Invisible text elements (``.alpha = 0``) are excluded from string reapplication to preserve 
@@ -435,6 +438,9 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
 
 - ``LUA::settext()`` doesn't affect config-strings.
 
+- ``settext()`` second parameter used for appendages is ignored as string concatenation can
+  be used instead.
+
 - UI element archiving (``.archived``) is primarily intended for toggling spectated player
   HUD-elem visibility during killcam/spectator/codcaster but can be used to render an additional 
   ``31`` elements concurrently as they occupy a separate memory store.
@@ -466,7 +472,7 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
 
 Name                         | Contribution                                              | Date       | Reference
 -----------------------------|-----------------------------------------------------------|------------|-----------
-cooljay                      | ---                                                       | 2026:06:09 | ---
+cooljay                      | Refinement                                                | 2026:06:09 | ---
 xeirh                        | Testing                                                   | 2026       | ---
 treminaor                    | Additional influencers discovery                          | 2024:02:04 | https://wiki.ugx-mods.com/Modding/World-at-War-Modtools/Script/G_FindConfigstringIndex-overflow.html \ https://github.com/UGX-Mods/community-wiki/blob/main/Modding/World-at-War-Modtools/Script/G_FindConfigstringIndex-overflow.html
 EternalHabit/xTurntUpLobbies | Rendition                                                 | 2016:07:13 | https://nextgenupdate.com/forums/black-ops-2-gsc-mods-scripts/916615-gsc-resources.html

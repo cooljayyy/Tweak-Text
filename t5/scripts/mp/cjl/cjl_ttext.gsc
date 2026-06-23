@@ -163,7 +163,7 @@ TText_Evaluate(string)
 TText_Create(text)
 {
 	text.idx = level.ttexts.size; //Used for text deletion.
-	text.archived = (level.ui_count > 30); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
+	text.archived = (level.ui_count < 31); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
 	level.ui_count ++;
 	level.ttexts[level.ttexts.size] = text;
 }

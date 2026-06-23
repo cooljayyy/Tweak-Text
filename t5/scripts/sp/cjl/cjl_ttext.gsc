@@ -155,11 +155,13 @@ TText_Evaluate(string)
 TText_Create(text)
 {
 	text.idx = level.ttexts.size; //Used for text deletion.
-	text.archived = (level.ui_count > 30); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
+	text.archived = (level.ui_count < 31); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
 	level.ui_count ++;
 	level.ttexts[level.ttexts.size] = text;
 }
 	/**<************************************************************
+	   - Note .index is used by OC scripts and is avoided here to
+	     prevent conflict.
 	   - Idea of invoking TText_Setup() here is infeasible as such
 		 MUST be invoked on first server frame.
 	 ***************************************************************/

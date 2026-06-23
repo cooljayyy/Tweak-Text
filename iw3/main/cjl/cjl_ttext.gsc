@@ -55,7 +55,7 @@ TText_Setup()
 		tstrings_cap["sab"]  = 593; //Sabotage
 		tstrings_cap["sd"]   = 590; //Search and Destroy
 		tstrings_cap["dom"]  = 596; //Domination
-		tstrings_cap["dm"]   = 604; //Free for All
+		tstrings_cap["dm"]   = 604; //Free-for-All
 		tstrings_cap["ctf"]  = 604; //Capture the Flag (Cut)
 		if (!IsDefined(tstrings_cap[level.gametype])) level.tstrings_cap = 423; //Custom gametypes.
 		else level.tstrings_cap = (tstrings_cap[level.gametype] - 100); //*Approximate* uncached run-time strings accounted for.
@@ -158,11 +158,13 @@ TText_Evaluate(string)
 TText_Create(text)
 {
 	text.idx = level.ttexts.size; //Used for text deletion.
-	text.archived = (level.ui_count > 30); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
+	text.archived = (level.ui_count < 31); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
 	level.ui_count ++;
 	level.ttexts[level.ttexts.size] = text;
 }
 	/**<************************************************************
+	   - Note .index is used by OC scripts and is avoided here to
+	     prevent conflict.
 	   - Idea of invoking TText_Setup() here is infeasible as such
 		 MUST be invoked on first server frame.
 	 ***************************************************************/
