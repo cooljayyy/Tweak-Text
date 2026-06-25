@@ -43,7 +43,7 @@ Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
 **CoD4x** is unsupported as it provides its own engine side implementation which inhibits this
 script from working.
 
-**IW1/IW2/T3** is unsupported as essential function ``clearalltextafterhudelem()`` is absent.
+**IW1, IW2, T3** is unsupported as essential function ``clearalltextafterhudelem()`` is absent.
 
 **IW6** is unsupported as essential function ``clearalltextafterhudelem()`` is defective.
 PC function is empty.
@@ -116,12 +116,13 @@ Note ``.label`` is also unable to be cleared.
 
      ```c
      text = newhudelem();
-     TText_Setup(text); //<--- HERE
+     TText_Create(text); //<--- HERE
      text.fontscale = 1.0;
      text.x = 0.0;
      text.y = 0.0;
      //...
      ```
+     Replace ``text`` with existing name.
 
   5. **Replace** listed instances present in user scripts with the counterparts:
 
@@ -192,6 +193,11 @@ Note ``.label`` is also unable to be cleared.
      Replace ``"stump"`` with adjusted stump string.
 
 ## Notice
+
+- Script heap variable usage:  
+``7`` parents  
+``136`` average children ``((24 elems × 1 player × 3 children) + 63 tdm strings + 1 anchors)``  
+``3864`` max children ``((62 elems × 18 players × 3 children) + 511 strings + 5 anchors)``
 
 - Text elements must never be created before ``TText_Setup()`` has executed.
 

@@ -54,7 +54,7 @@ TText_Setup()
 		tstrings_cap["koth"] = 845; //Headquarters
 		tstrings_cap["twar"] = 832; //War
 		tstrings_cap["ctf"]  = 843; //Capture the Flag
-		tstrings_cap["dm"]   = 855; //Free for All
+		tstrings_cap["dm"]   = 855; //Free-for-All
 		tstrings_cap["dom"]  = 847; //Domination
 		tstrings_cap["sd"]   = 841; //Search and Destroy
 		tstrings_cap["sab"]  = 842; //Sabotage

@@ -50,7 +50,7 @@ TText_Setup()
 	}
 	else
 	{
-		tstrings_cap["dm"]     = 209; //Free for All
+		tstrings_cap["dm"]     = 209; //Free-for-All
 		tstrings_cap["war"]    = 208; //Team Deathmatch
 		tstrings_cap["sd"]     = 195; //Search and Destroy
 		tstrings_cap["sab"]    = 196; //Sabotage

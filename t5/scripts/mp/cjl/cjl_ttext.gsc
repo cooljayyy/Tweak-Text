@@ -52,7 +52,7 @@ TText_Setup()
 	else
 	{
 		tstrings_cap["tdm"]  = 722; //Team Deathmatch
-		tstrings_cap["dm"]   = 722; //Free for All
+		tstrings_cap["dm"]   = 722; //Free-for-All
 		tstrings_cap["sd"]   = 708; //Search & Destroy
 		tstrings_cap["dom"]  = 709; //Domination
 		tstrings_cap["koth"] = 713; //Headquarters
