@@ -18,17 +18,13 @@
 //██ Tweak-Text
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Setup
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TText_Setup()
 {
 	if (IsDefined(level.tstrings)) //Prevents re-invocation.
 		return;
-	if (!IsDefined(level.ui_count))
-		level.ui_count = 0;
+	if (!IsDefined(level.ui_acount))
+		level.ui_acount = 0;
 	if (!IsDefined(level.ttext_mode) ||
 	   (level.ttext_mode > 1 && maps\mp\_utility::GetWatchedDvar("roundlimit") > 1))
 		level.ttext_mode = 0;
@@ -86,11 +82,6 @@ TText_Setup()
 		- @todo Factor exact uncached/cached run-time string limits.
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text / Round Switch
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Handler
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 TTextRoundSwitch_Handler()
 {
 	level waittill("restarting");
@@ -105,11 +96,6 @@ TTextRoundSwitch_Handler()
 		- level.onroundswitch callback usage is infeasible as it
 		  pertains to "switch sides" not round switch.
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Evaluate
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TText_Evaluate(string)
 {
@@ -159,29 +145,34 @@ TText_Evaluate(string)
 		 be counted.
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Create
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 TText_Create(text)
 {
+	if (IsDefined(text.owner))
+	{
+		if (!IsDefined(text.owner.ui_acount)) text.owner.ui_acount = 0;
+		text.archived = (text.archived && ((text.owner.ui_acount + level.ui_acount) < 31));
+    	if (text.archived) text.owner.ui_acount ++;
+	}
+    else
+    {
+    	text.archived = (text.archived && level.ui_acount < 31);
+    	if (text.archived) level.ui_acount ++;
+	}
+
 	text.idx = level.ttexts.size; //Used for text deletion.
-	text.archived = (level.ui_count < 31); //UI element render limit is 62 (31 unarchived, 31 archived). Omits OC UI element count.
-	level.ui_count ++;
 	level.ttexts[level.ttexts.size] = text;
 }
 	/**<************************************************************
-	   - Note .index is used by OC scripts and is avoided here to
-	     prevent conflict.
+	   - Auto-archiving factors both level and player elements
+	     sharing same archive pools and fills "archived"
+	     pool first before overflow into "unarchived" pool.
+	     Elements already set to "unarchived" are ignored.
+	     OC elements are excluded from archive count.
+	   - .idx naming is used instead of .index to prevent conflict
+	     with OC scripts that use the latter.
 	   - Idea of invoking TText_Setup() here is infeasible as such
 		 MUST be invoked on first server frame.
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Delete
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TText_Delete(text)
 {
@@ -195,17 +186,12 @@ TText_Delete(text)
 	level.ttexts[text.idx] = level.ttexts[eidx]; //Remove-swap.
 	level.ttexts[text.idx].idx = text.idx;
 	level.ttexts[eidx] = undefined; //Decrements array.size.
-	level.ui_count --;
+	level.ui_acount --;
 	text Destroy();
 }
 	/**<************************************************************
 		- Remove-Swap method is faster than ArrayRemoveIndex().
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Set
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TText_Set(text, string)
 {
@@ -234,11 +220,6 @@ TText_Set(text, string)
 
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text / Number
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Set
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 TTextNumber_Set(text, number)
 {
 	text.label = &""; //Label is never used.
@@ -248,11 +229,6 @@ TTextNumber_Set(text, number)
 		- Empty label is used to distinguish "number" elements
 		  from other labels.
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text / Label
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Set
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TTextLabel_Set(text, string)
 {
@@ -264,11 +240,6 @@ TTextLabel_Set(text, string)
 		@param string Must prefix "&".
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text / Label / Number
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Set
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 TTextLabelNumber_Set(text, number)
 {
 	text SetValue(number);
@@ -276,11 +247,6 @@ TTextLabelNumber_Set(text, number)
 	/**<************************************************************
 		- TTextLabel_Set() must be used first.
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Tweak-Text / Alpha
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Set
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 TTextAlpha_Set(text, alpha)
 {
@@ -294,15 +260,12 @@ TTextAlpha_Set(text, alpha)
 		  string application and thus are reapplied here when
 		  set visible again.
 	 ***************************************************************/
+
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //██▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 //██ Config-strings
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Stump
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Clear
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 CSStump_Clear()
 {
@@ -324,11 +287,6 @@ CSStump_Clear()
 		  remains after clearing.
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Stump
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Push
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 CSStump_Push()
 {
 	DebugPrint("[tweak-text]: Stump push");
@@ -341,11 +299,6 @@ CSStump_Push()
 		- Localized string operator "&" cannot be stored in array
 		  as it breaks array size.
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Head
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Clear
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 CSHead_Clear()
 {
@@ -368,11 +321,6 @@ CSHead_Clear()
 		  whether map_restart or fast_restart occurred.
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Anchor
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Clear
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 CSAnchor_Clear(idx)
 {
 	DebugPrint("[tweak-text]: Anchor clear (" + idx + ")");
@@ -386,22 +334,12 @@ CSAnchor_Clear(idx)
 		  clear "all after it" which preserves hudelem slots.
 	 ***************************************************************/
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Anchor
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Push
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 CSAnchor_Push(string)
 {
 	DebugPrint("[tweak-text]: Anchor push (" + level.tstrings.size + "/" + level.tstrings_cap + ", " + level.tanchors.size + ", " + string + ")");
 	level.tanchors[level.tanchors.size] = string;
 	SetDvar("ttext_head", string);
 }
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Anchor
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Pop
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 CSAnchor_Pop()
 {
@@ -411,11 +349,6 @@ CSAnchor_Pop()
 	level.tanchors[idx] = undefined; //Sequential decrement is essential.
 	wait 0.05; //Prevents reliable command cycle-out.
 }
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Anchor
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Pops
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 CSAnchor_Pops()
 {
@@ -445,10 +378,6 @@ CSAnchor_Pops()
 //██ Imports
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Script
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Assertion / Exit (𝐌𝐚𝐜𝐫𝐨)
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 AssertX(condition, message)
 {
@@ -462,11 +391,6 @@ AssertX(condition, message)
 	ExitLevel();
 }
 
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Script
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Debug / Print (𝐌𝐚𝐜𝐫𝐨)
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
-
 DebugPrint(message)
 {
 	if (GetDvarInt("developer"))
@@ -478,10 +402,6 @@ DebugPrint(message)
 //██ Analysis
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: Config-strings / Overflow
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Test
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 CSOverflow_Test()
 {
@@ -512,11 +432,6 @@ CSOverflow_Test()
 	/**<************************************************************
 		- Call in init().
 	 ***************************************************************/
-
-//█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-//█ 𝗧𝗮𝗿𝗴𝗲𝘁: UI / Limit
-//█ 𝗔𝗰𝘁𝗶𝗼𝗻: Test
-//█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 
 UILimit_Test()
 {

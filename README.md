@@ -274,8 +274,8 @@ Note ``.label`` is also unable to be cleared.
   **moderate**/**maximum** mode's usage of multiple anchors otherwise inhibits due to incurring 
   *reliable command cycle-out* from exceeding ``129`` in a single frame (unlike ``map_restart``).
 
-- **Auto-archiving** of text elements is applied to enable rendering 62 maximum UI elements 
-  simultaneously.
+- **Auto-archiving** of text elements is applied to enable rendering ``62`` maximum UI elements 
+  simultaneously when archiving is otherwise unutilized.
 
 ---
 
@@ -296,7 +296,7 @@ Note ``.label`` is also unable to be cleared.
 
 - String variable character limit is ``8191``.
 
-- UI element render limit is ``62`` (``31`` unarchived, ``31`` archived).
+- UI element render limit is ``62`` (``31`` archived, ``31`` unarchived, per player including level elements)
 
   T6MP has 6x slots preoccupied which can be removed using:\
   ``scripts\mp\cl\cjl_core::SessionOUI_Delete()``.
@@ -448,8 +448,12 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
   be used instead.
 
 - UI element archiving (``.archived``) is primarily intended for toggling spectated player
-  HUD-elem visibility during killcam/spectator/codcaster but can be used to render an additional 
-  ``31`` elements concurrently as they occupy a separate memory store.
+  element visibility during killcam/spectator/codcaster and visibility to owner during killcam
+  but can be coordinated to render ``62`` simultaneous elements as both states occupy separate 
+  pools.
+
+  ``.archived = true``\: ✅ Spectators ❌ Owner  
+  ``.archived = false``: ✅ Owner      ❌ Spectators
 
 - Mismatching text element strings is caused by unorderly reapplication of strings in which
   they continue to point to the same config-strings index after being replaced by a different 
