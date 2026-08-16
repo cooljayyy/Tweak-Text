@@ -183,12 +183,18 @@ TText_Delete(text)
 		text Destroy();
 		return;
 	}
+	if (text.archived)
+	{
+		if (IsDefined(text.owner))
+			text.owner.ui_acount --;
+		else
+			level.ui_acount --;
+	}
 
 	eidx = (level.ttexts.size - 1);
 	level.ttexts[text.idx] = level.ttexts[eidx]; //Remove-swap.
 	level.ttexts[text.idx].idx = text.idx;
 	level.ttexts[eidx] = undefined; //Decrements array.size.
-	level.ui_acount --;
 	text Destroy();
 }
 	/**<************************************************************
@@ -407,7 +413,7 @@ DebugPrint(message)
 
 CSOverflow_Test()
 {
-	level Endon("game_ended");
+	level Endon("end_game");
 
 	DebugPrint("[tweak-text]: Config-strings overflow test");
 
@@ -437,7 +443,7 @@ CSOverflow_Test()
 
 UILimit_Test()
 {
-	level Endon("game_ended");
+	level Endon("end_game");
 
 	DebugPrint("[tweak-text]: UI limit test");
 	texts = [];

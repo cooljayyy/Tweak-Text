@@ -40,6 +40,9 @@ Call of Duty: Modern Warfare III        | 2023 | JUP       | 2.x         | ❌
 Call of Duty: Black Ops 6               | 2024 | T10       | 2.x         | ❌
 Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
 
+**Plutonium T4, T5, T6** provides ``settextunlimited()`` function which can be used instead of
+this script.
+
 **CoD4x** is unsupported as it provides its own engine side implementation which inhibits this
 script from working.
 
