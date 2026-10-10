@@ -16,32 +16,37 @@ Call of Duty                            | 2003 | IW1*/COD1 | 1.0         | ⛔
 Call of Duty 2                          | 2005 | IW2*/COD2 | 1.0         | ⛔
 Call of Duty 3                          | 2006 | T3*/COD3  | 1.0         | ⛔
 Call of Duty 4: Modern Warfare          | 2007 | IW3/COD4  | 1.0         | ✅*
-Call of Duty: World at War              | 2008 | T4/COD5   | 1.0         | ✅
+Call of Duty: World at War              | 2008 | T4*/COD5  | 1.0         | ✅
 Call of Duty: Modern Warfare 2          | 2009 | IW4/COD6  | 1.1         | ✅
 Call of Duty: Black Ops                 | 2010 | T5/COD7   | 1.0         | ✅
+Call of Duty: Future Warfare            | 2011 | NX1       | 1.1         | ❌
 Call of Duty: Modern Warfare 3          | 2011 | IW5/COD8  | 1.2         | ✅
-Call of Duty: Black Ops II              | 2012 | T6/COD9   | 1.2         | ✅
-Call of Duty Online                     | 2012 | H0/CODO   | 1.x         | ⛔
+Call of Duty: Black Ops II              | 2012 | T6/COD9   | 1.2         | ✅*
+Call of Duty Online                     | 2012 | R1/OL     | 1.x         | ⛔
 Call of Duty: Ghosts                    | 2013 | IW6       | 1.3         | ⛔
 Call of Duty: Advanced Warfare          | 2014 | S1        | 1.3         | ❌
 Call of Duty: Black Ops III             | 2015 | T7        | 2.0         | ⛔
 Call of Duty: Infinite Warfare          | 2016 | IW7       | 1.3         | ❌
 Call of Duty: Modern Warfare Remastered | 2016 | H1        | 1.3         | ⛔
-Call of Duty: WWII                      | 2017 | S2        | ?           | ❌
+Call of Duty: WWII                      | 2017 | S2        | 1.3         | ❌
 Call of Duty: Black Ops 4               | 2018 | T8        | 2.x         | ❌
 Call of Duty: Modern Warfare            | 2019 | IW8       | 1.3         | ❌
-Call of Duty: Warzone                   | 2020 | WZ        | 1.3         | ❌
+Call of Duty: Warzone                   | 2020 | IW8/WZ    | 1.3         | ❌
 Call of Duty: Modern Warfare 2 CR       | 2020 | H2        | 1.3         | ❌
 Call of Duty: Black Ops Cold War        | 2020 | T9        | 2.x         | ❌
-Call of Duty: Vanguard                  | 2021 | S4        | ?           | ❌
-Call of Duty: Modern Warfare II         | 2022 | IW9       | ?           | ❌
-Call of Duty: Warzone 2.0               | 2022 | WZM       | ?           | ❌
+Call of Duty: Vanguard                  | 2021 | S4        | 1.3         | ❌
+Call of Duty: Modern Warfare II         | 2022 | IW9       | 1.3         | ❌
+Call of Duty: Warzone 2.0               | 2022 | IW9/WZ    | 1.3         | ❌
 Call of Duty: Modern Warfare III        | 2023 | JUP       | 2.x         | ❌
 Call of Duty: Black Ops 6               | 2024 | T10       | 2.x         | ❌
 Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
+---                                     | ---  | ZULU      | ---         | ❌
+---                                     | ---  | RAP       | ---         | ❌
+---                                     | ---  | WAYWARD   | ---         | ❌
+---                                     | ---  | ANVIL     | ---         | ❌
 
-**Plutonium T4, T5, T6** provides ``settextunlimited()`` function which can be used instead of
-this script.
+**Plutonium T4, T5, T6** provides ``settextunlimited()`` function which can be used instead of this script, however it only substitutes a text element's existing configstring, not clearing
+deleted text elements configstrings which are susceptible to overflow still.
 
 **CoD4x** is unsupported as it provides its own engine side implementation which inhibits this
 script from working.
