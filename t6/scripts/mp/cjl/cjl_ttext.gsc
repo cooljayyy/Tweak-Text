@@ -33,7 +33,7 @@ TText_Setup()
 	if (!IsDefined(level.ttext_mode) || (level.ttext_mode > 1 && _RoundCount_Get() > 1))
 		level.ttext_mode = 0;
 
-	DebugPrintA("[cjl_ttext]: Setup");
+	_DebugPrint("[cjl_ttext]: Setup");
 	level thread TTextRoundSwitch_Handler(); //Executes each round end.
 	level.tstrings = []; //Order-dependent.
 	level.tanchors = [];
@@ -109,7 +109,7 @@ TTextRoundSwitch_CB()
 	if (_Round_WasLast()) //Skip final round to preserve any custom map vote UI.
 		return;
 
-	DebugPrintA("[cjl_ttext]: Round switch pops");
+	_DebugPrint("[cjl_ttext]: Round switch pops");
 	CSAnchor_Pops(); //Required regardless of maximum mode.
 	wait 0.05; //Prevents reliable command cycle-out.
 }
@@ -120,7 +120,7 @@ TTextRoundSwitch_CB()
 
 TText_Evaluate(string)
 {
-	DebugPrintA("[cjl_ttext]: Text evaluate (" + level.tstrings.size + "/" + level.tstrings_cap + ", " + level.ttext_mode + ", " + level.tanchors.size + ", " + string + ")");
+	_DebugPrint("[cjl_ttext]: Text evaluate (" + level.tstrings.size + "/" + level.tstrings_cap + ", " + level.ttext_mode + ", " + level.tanchors.size + ", " + string + ")");
 
 	if (level.tstrings.size >= level.tstrings_cap)
 	{
@@ -132,12 +132,12 @@ TText_Evaluate(string)
 		// ⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺⎺
 		level.tstrings = [];
 		level.tstrings[level.tanchors[0]] = true; //Preserve first anchor string.
-		DebugPrintA("[cjl_ttext]: Reapply strings");
+		_DebugPrint("[cjl_ttext]: Reapply strings");
 
 		for (i = 0; i < level.ttexts.size; i ++)
 		{
 			text = level.ttexts[i];
-			AssertXA((level.tstrings.size < level.tstrings_cap), ("CJL - Too many concurrent tstrings: " + level.tstrings.size)); //Exit if reapplied strings exceed limit.
+			_AssertX((level.tstrings.size < level.tstrings_cap), ("CJL - Too many concurrent tstrings: " + level.tstrings.size)); //Exit if reapplied strings exceed limit.
 
 			if (text.alpha > 0 && IsDefined(text.string)) //Visible text only.
 			{
@@ -228,8 +228,8 @@ TText_Delete(text)
 
 TText_Set(text, string)
 {
-	AssertXA(IsDefined(string), "CJL - Undefined string.");
-	AssertXA((string.size < 256), "CJL - Exceeded text character limit: " + string.size + "/255.");
+	_AssertX(IsDefined(string), "CJL - Undefined string.");
+	_AssertX((string.size < 256), "CJL - Exceeded text character limit: " + string.size + "/255.");
 	text.string = string; //Store preserved copy of string.
 	//#ifdef PL && (T6 || T5 || T4)
 	//text SetTextUnlimited(string);
@@ -333,7 +333,7 @@ TTextAlpha_Set(text, alpha)
 
 CSStump_Clear()
 {
-	DebugPrintA("[cjl_ttext]: Stump clear (" + game["roundsplayed"] + "/" + _RoundCount_Get() + ")");
+	_DebugPrint("[cjl_ttext]: Stump clear (" + game["roundsplayed"] + "/" + _RoundCount_Get() + ")");
 	anchor = NewHUDElem();
 	anchor SetText(&"MP_HALFTIME"); //Localized string operator "&" is essential.
 	anchor ClearAllTextAfterHUDElem();
@@ -354,7 +354,7 @@ CSStump_Clear()
 
 CSStump_Push()
 {
-	DebugPrintA("[cjl_ttext]: Stump push");
+	_DebugPrint("[cjl_ttext]: Stump push");
 	level.tanchors[0] = "§STUMP";
 	level.tstrings["§STUMP"] = true;
 }
@@ -370,7 +370,7 @@ CSHead_Clear()
 	if (GetDvar("ttext_head") == "")
 		return;
 
-	DebugPrintA("[cjl_ttext]: Head clear");
+	_DebugPrint("[cjl_ttext]: Head clear");
 	CSAnchor_Push(GetDvar("ttext_head")); //Re-register head from previous match if present.
 	CSAnchor_Clear((level.tanchors.size - 1));
 	level.tstrings[level.tanchors[0]] = true; //Re-register head string.
@@ -388,7 +388,7 @@ CSHead_Clear()
 
 CSAnchor_Clear(idx)
 {
-	DebugPrintA("[cjl_ttext]: Anchor clear (" + idx + ")");
+	_DebugPrint("[cjl_ttext]: Anchor clear (" + idx + ")");
 	anchor = NewHUDElem();
 	anchor SetText(level.tanchors[idx]);
 	anchor ClearAllTextAfterHUDElem();
@@ -401,14 +401,14 @@ CSAnchor_Clear(idx)
 
 CSAnchor_Push(string)
 {
-	DebugPrintA("[cjl_ttext]: Anchor push (" + level.tstrings.size + "/" + level.tstrings_cap + ", " + level.tanchors.size + ", " + string + ")");
+	_DebugPrint("[cjl_ttext]: Anchor push (" + level.tstrings.size + "/" + level.tstrings_cap + ", " + level.tanchors.size + ", " + string + ")");
 	level.tanchors[level.tanchors.size] = string;
 	SetDvar("ttext_head", string);
 }
 
 CSAnchor_Pop()
 {
-	DebugPrintA("[cjl_ttext]: Anchor pop (" + level.tanchors.size + ", " + level.tanchors[(level.tanchors.size - 1)] + ")");
+	_DebugPrint("[cjl_ttext]: Anchor pop (" + level.tanchors.size + ", " + level.tanchors[(level.tanchors.size - 1)] + ")");
 	idx = (level.tanchors.size - 1);
 	CSAnchor_Clear(idx);
 	level.tanchors[idx] = undefined; //Sequential decrement is essential.
@@ -417,7 +417,7 @@ CSAnchor_Pop()
 
 CSAnchor_Pops()
 {
-	DebugPrintA("[cjl_ttext]: Anchor pops (" + level.tstrings.size + "/" + level.tstrings_cap + "/" + level.tstrings_clear_cap + ", " + level.tanchors.size + ")");
+	_DebugPrint("[cjl_ttext]: Anchor pops (" + level.tstrings.size + "/" + level.tstrings_cap + "/" + level.tstrings_clear_cap + ", " + level.tanchors.size + ")");
 
 	for (i = (level.tanchors.size - 1); i > 0; i --)
 		CSAnchor_Pop();
@@ -461,7 +461,7 @@ CSAnchor_Pops()
 
 /*CSString_Push(string)
 {
-	DebugPrintA("[cjl_ttext]: String push (" + string + ")");
+	_DebugPrint("[cjl_ttext]: String push (" + string + ")");
 	anchor = NewHUDElem();
 	anchor SetText(string);
 	anchor Destroy();
@@ -478,19 +478,19 @@ CSAnchor_Pops()
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-AssertXA(condition, message)
+_AssertX(condition, message)
 {
 	if (IsDefined(condition) && condition)
 		return;
 
 	AssertMsg(message); //Prints to console when developer dvar enabled.
-	println(message); //Prints to console.
+	PrintLn(message); //Prints to console.
 	SetDvar("ui_errorTitle", "Error"); //Sets UI error.
 	SetDvar("ui_errorMessage", message);
 	ExitLevel();
 }
 
-DebugPrintA(message)
+_DebugPrint(message)
 {
 	if (GetDvarInt("debug"))
 		println(message);
@@ -535,7 +535,7 @@ CSOverflow_Test()
 	//level Endon("end_game");
 	//#endif
 
-	DebugPrintA("[cjl_ttext]: Config-strings overflow test");
+	_DebugPrint("[cjl_ttext]: Config-strings overflow test");
 
 	if (_Session_IsRoundBased())
 	{
@@ -549,13 +549,14 @@ CSOverflow_Test()
 	TText_Setup();
 	if (level.players.size == 0) level waittill("connected"); //Prevents reliable command cycle-out.
 	texts = [];
-	n = 30;
+	n = 30; //n text elements.
 
-	for (i = 0; i < n; i ++) //n text elements.
+	for (i = 0; i < n; i ++)
 	{
 		texts[i] = NewHUDElem();
 		texts[i].x = (100 + (10 * i));
 		texts[i].y = (5 + (10 * i));
+		texts[i].archived = (i < 31);
 		TText_Create(texts[i]);
 	}
 	for (i = 0; i < 2147483647; i ++)
@@ -576,7 +577,7 @@ UILimit_Test()
 {
 	level Endon("game_ended");
 
-	DebugPrintA("[cjl_ttext]: UI limit test");
+	_DebugPrint("[cjl_ttext]: UI limit test");
 	texts = [];
 
 	for (i = 0; i < 64; i ++) //Must be < string limit.

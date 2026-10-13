@@ -4,7 +4,7 @@
 
 - This product is intended to solve string overflow problems which occur for Call of Duty 
   **GSC-1.x MP/ZM** *user scripts* that variably set text across run-time and encounter the 
-  error: ``G_Findconfig-stringIndex: overflow (488)``.
+  error: ``G_FindconfigstringIndex: overflow``.
 
   SP is currently unsupported.
 
@@ -45,8 +45,8 @@ Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
 ---                                     | ---  | WAYWARD   | ---         | ❌
 ---                                     | ---  | ANVIL     | ---         | ❌
 
-**Plutonium T4, T5, T6** provides ``settextunlimited()`` function which can be used instead of this script, however it only substitutes a text element's existing configstring, not clearing
-deleted text elements configstrings which are susceptible to overflow still.
+**Plutonium T4, T5, T6** provides ``settextunlimited()`` function which replaces a target 
+text element's config-string and removes it when ``destroy()`` is invoked, of which can* be used instead of this script.
 
 **CoD4x** is unsupported as it provides its own engine side implementation which inhibits this
 script from working.
