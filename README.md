@@ -3,10 +3,10 @@
 ## Overview
 
 - This product is intended to solve string overflow problems which occur for Call of Duty 
-  **GSC-1.x MP/ZM** *user scripts* that variably set text across run-time and encounter the 
-  error: ``G_FindconfigstringIndex: overflow``.
+	**GSC-1.x MP/ZM** *user scripts* that variably set text across run-time and encounter the 
+	error: ``G_FindconfigstringIndex: overflow``.
 
-  SP is currently unsupported.
+	SP is currently unsupported.
 
 ## Coverage
 
@@ -15,13 +15,13 @@ Game                                    | Date | Codename  | GSC Version | Suppo
 Call of Duty                            | 2003 | IW1*/COD1 | 1.0         | ⛔
 Call of Duty 2                          | 2005 | IW2*/COD2 | 1.0         | ⛔
 Call of Duty 3                          | 2006 | T3*/COD3  | 1.0         | ⛔
-Call of Duty 4: Modern Warfare          | 2007 | IW3/COD4  | 1.0         | ✅*
+Call of Duty 4: Modern Warfare          | 2007 | IW3/COD4  | 1.0         | ✅
 Call of Duty: World at War              | 2008 | T4*/COD5  | 1.0         | ✅
 Call of Duty: Modern Warfare 2          | 2009 | IW4/COD6  | 1.1         | ✅
 Call of Duty: Black Ops                 | 2010 | T5/COD7   | 1.0         | ✅
 Call of Duty: Future Warfare            | 2011 | NX1       | 1.1         | ❌
 Call of Duty: Modern Warfare 3          | 2011 | IW5/COD8  | 1.2         | ✅
-Call of Duty: Black Ops II              | 2012 | T6/COD9   | 1.2         | ✅*
+Call of Duty: Black Ops II              | 2012 | T6/COD9   | 1.2         | ✅
 Call of Duty Online                     | 2012 | R1/OL     | 1.x         | ⛔
 Call of Duty: Ghosts                    | 2013 | IW6       | 1.3         | ⛔
 Call of Duty: Advanced Warfare          | 2014 | S1        | 1.3         | ❌
@@ -40,11 +40,12 @@ Call of Duty: Warzone 2.0               | 2022 | IW9/WZ    | 1.3         | ❌
 Call of Duty: Modern Warfare III        | 2023 | JUP       | 2.x         | ❌
 Call of Duty: Black Ops 6               | 2024 | T10       | 2.x         | ❌
 Call of Duty: Black Ops 7               | 2025 | SAT       | 2.x         | ❌
----                                     | ---  | ZULU      | ---         | ❌
+Call of Duty: Modern Warfare 4          | 2026 | ZULU      | 2.x         | ❌
 ---                                     | ---  | RAP       | ---         | ❌
 ---                                     | ---  | WAYWARD   | ---         | ❌
 ---                                     | ---  | ANVIL     | ---         | ❌
 
+\
 **Plutonium T4, T5, T6** provides ``settextunlimited()`` function which replaces a target 
 text element's config-string and removes it when ``destroy()`` is invoked, of which can* be used instead of this script.
 
@@ -69,136 +70,135 @@ Note ``.label`` is also unable to be cleared.
 ## Setup
 
 - Implementation of this requires applying the following modifications to desired
-  scripts/projects/mods:
+	scripts/projects/mods:
 
-  1. **Copy** or **aggregate** **``cjl_ttext.gsc``** script into target scripts directory:
+	1. **Copy** or **aggregate** **``cjl_ttext.gsc``** script into target scripts directory:
 
-     Platform              | Directory                                                  | Method
-     ----------------------|------------------------------------------------------------|-----------
-     Plutonium - T6MP      | ``%LOCALAPPDATA%\Plutonium\storage\t6\scripts\mp\cjl``     | Copy
-     Plutonium - T6ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t6\scripts\zm\cjl``     | Copy
-     Plutonium - T5MP      | ``%LOCALAPPDATA%\Plutonium\storage\t5\scripts\mp\cjl``     | Copy
-     Plutonium - T5ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t5\scripts\sp\cjl``     | Copy
-     Plutonium - T4MP      | ``%LOCALAPPDATA%\Plutonium\storage\t4\raw\scripts\mp\cjl`` | Copy
-     Plutonium - T4ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t4\raw\scripts\sp\cjl`` | Copy
-     Plutonium - IW5MP     | ``%LOCALAPPDATA%\Plutonium\storage\iw5\scripts\cjl``       | Copy
-     GSC Studio - T6MP/ZM  | ``maps\mp\_development_dvars.gsc``                         | Aggregate
-     GSX Studio - T6MP/ZM  | ``maps\mp\_development_dvars.gsc``                         | Aggregate
-     IW6x - IW6MP          | ``<GAMEROOT>\data\scripts\mp\cjl``                         | Copy
-     IW4x - IW4MP          | ``<GAMEROOT>\userraw\scripts\cjl``                         | Copy
-     CoD4x - IW3MP         | ``<GAMEROOT>\main\cjl``                                    | Copy
+		 Platform              | Directory                                                  | Method
+		 ----------------------|------------------------------------------------------------|-----------
+		 Plutonium - T6MP      | ``%LOCALAPPDATA%\Plutonium\storage\t6\scripts\mp\cjl``     | Copy
+		 Plutonium - T6ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t6\scripts\zm\cjl``     | Copy
+		 Plutonium - T5MP      | ``%LOCALAPPDATA%\Plutonium\storage\t5\scripts\mp\cjl``     | Copy
+		 Plutonium - T5ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t5\scripts\sp\cjl``     | Copy
+		 Plutonium - T4MP      | ``%LOCALAPPDATA%\Plutonium\storage\t4\raw\scripts\mp\cjl`` | Copy
+		 Plutonium - T4ZM      | ``%LOCALAPPDATA%\Plutonium\storage\t4\raw\scripts\sp\cjl`` | Copy
+		 Plutonium - IW5MP     | ``%LOCALAPPDATA%\Plutonium\storage\iw5\scripts\cjl``       | Copy
+		 GSC Studio - T6MP/ZM  | ``maps\mp\_development_dvars.gsc``                         | Aggregate
+		 GSX Studio - T6MP/ZM  | ``maps\mp\_development_dvars.gsc``                         | Aggregate
+		 IW6x - IW6MP          | ``<GAMEROOT>\data\scripts\mp\cjl``                         | Copy
+		 IW4x - IW4MP          | ``<GAMEROOT>\userraw\scripts\cjl``                         | Copy
+		 CoD4x - IW3MP         | ``<GAMEROOT>\main\cjl``                                    | Copy
 
-  2. **Include** **``cjl_ttext.gsc``** inside every user script that uses text elements 
-     by inserting the following code at the top of each one:
-     
-     ```c
-     #include <path>\cjl\cjl_ttext;
-     ```
-     Replace ``<path>`` with target scripts subdirectory, 
-     e.g. ``scripts\mp``, ``scripts\zm``, ``scripts\sp``, ``scripts\``.
+	2. **Include** **``cjl_ttext.gsc``** inside every user script that uses text elements 
+		 by inserting the following code at the top of each one:
+		 
+		 ```c
+		 #include <path>\cjl\cjl_ttext;
+		 ```
+		 Replace ``<path>`` with target scripts subdirectory, 
+		 e.g. ``scripts\mp``, ``scripts\zm``, ``scripts\sp``, ``scripts\``.
 
-  3. **Call** **``TText_Setup()``** at the top of ``init()`` for every user script 
-     that uses text elements. E.g.
+	3. **Call** **``TText_Init()``** at the top of ``init()`` for every user script 
+		 that uses text elements. E.g.
 
-     ```c
-     init()
-     {
-         TText_Setup(); //<--- HERE
-         //Existing code...
-     }
-     ```
-     Call must be non-threaded and occur after game script config-strings have populated 
-     (``precachestring()``).
+		 ```c
+		 init()
+		 {
+				 TText_Init(); //<--- HERE
+				 //Existing code...
+		 }
+		 ```
+		 Call must be non-threaded and occur after game script config-strings have populated 
+		 (``precachestring()``).
 
-  4. **Call** **``TText_Create()``** immediately after every listed instance present in 
-     user scripts:
+	4. **Call** **``TText_Create()``** immediately after every listed instance present in 
+		 user scripts:
 
-     Instance                 |
-     -------------------------|
-     createfontstring()       |
-     createserverfontstring() |
-     newhudelem()             |
-     newclienthudelem()       |
+		 Instance                 |
+		 -------------------------|
+		 createfontstring()       |
+		 createserverfontstring() |
+		 newhudelem()             |
+		 newclienthudelem()       |
 
-     E.g.
+		 E.g.
 
-     ```c
-     text = newhudelem();
-     TText_Create(text); //<--- HERE
-     text.fontscale = 1.0;
-     text.x = 0.0;
-     text.y = 0.0;
-     //...
-     ```
-     Replace ``text`` with existing name.
+		 ```c
+		 text = newhudelem();
+		 TText_Create(text); //<--- INSERT HERE
+		 text.fontscale = 1.0;
+		 text.x = 0.0;
+		 text.y = 0.0;
+		 //...
+		 ```
+		 Replace ``text`` with existing name.
 
-  5. **Replace** listed instances present in user scripts with the counterparts:
+	5. **Replace** listed instances present in user scripts with the counterparts:
 
-     Instance               | Replacement
-     -----------------------|---------------------------
-     text settext("string") | TText_Set(text, "string")
-     text destroy()         | TText_Delete(text)
-     text.alpha = n         | TTextAlpha_Set(text, n)
-     text.label = n         | TTextLabel_Set(text, n)
-     text setvalue(n)       | TTextLabelNumber_Set(text, n)
+		 Instance               | Replacement
+		 -----------------------|---------------------------
+		 text settext(n)        | TText_Set(text, n)
+		 text destroy()         | TText_Delete(text)
+		 text.alpha = n         | TTextAlpha_Set(text, n)
+		 text.label = n         | TTextLabel_Set(text, n)
+		 text setvalue(n)       | TTextLabelNumber_Set(text, n)
 
-     Replace ``text`` with existing name.\
-     Replace ``n`` with existing value.
+		 E.g.
 
-     E.g.
+		 ```c
+		 text = newhudelem();
+		 text.fontscale = 1.0;
+		 text.x = 0.0;
+		 text.y = 0.0;
+		 text.alignx = "left";
+		 text.aligny = "center";
+		 text.color = (1.0, 1.0, 1.0);
+		 text.alpha = 1.0;
+		 TText_Set(text, n); //<--- INSERT HERE
+		 //text settext(n);  //<--- REMOVE THIS
+		 //...
+		 ```
+		 Replace ``text`` with existing name.\
+		 Replace ``n`` with existing value.
 
-     ```c
-     text = newhudelem();
-     text.fontscale = 1.0;
-     text.x = 0.0;
-     text.y = 0.0;
-     text.alignx = "left";
-     text.aligny = "center";
-     text.color = (1.0, 1.0, 1.0);
-     text.alpha = 1.0;
-     TText_Set(text, "string"); //<--- HERE
-     //text settext("string");
-     //...
-     ```
+		 Note the aforementioned modifications must be applied to any loaded user scripts inside 
+		 fastfile mods too.
 
-     Note the aforementioned modifications must be applied to any loaded user scripts inside 
-     fastfile mods too.
+	6. <sup>***(optional)***</sup> **Set** optimal mode for user scripts which require many 
+		 text element strings by inserting the following code at the top of ``main()`` for 
+		 target scripts:
 
-  6. <sup>***(optional)***</sup> **Set** optimal mode for user scripts which require many 
-     text element strings by inserting the following code at the top of ``main()`` for 
-     target scripts:
+		 ```c
+		 main()
+		 {
+				 level.ttext_mode = index; //<--- HERE
+		 }
+		 ```
+		 Replace ``index`` with with any of the following mode indexes:
 
-     ```c
-     main()
-     {
-         level.ttext_mode = index; //<--- HERE
-     }
-     ```
-     Replace ``index`` with with any of the following mode indexes:
+		 Name     | Index                    | String Limit | Preservation | Round Switch | Fast Restart | Anchors          
+		 ---------|--------------------------|--------------|--------------|--------------|--------------|------------------
+		 Minimum  | 0 <sub>*(default)*</sub> | < 100        | ✅           | ✅          | ✅           | Single           
+		 Moderate | 1                        | < 511        | ✅           | ✅          | ❌           | Multiple         
+		 Maximum  | 2                        | 511          | ❌           | ❌          | ❌           | Stump + Multiple 
 
-     Name     | Index                    | String Limit | Preservation | Round Switch | Fast Restart | Anchors          
-     ---------|--------------------------|--------------|--------------|--------------|--------------|------------------
-     Minimum  | 0 <sub>*(default)*</sub> | < 100        | ✅           | ✅          | ✅           | Single           
-     Moderate | 1                        | < 511        | ✅           | ✅          | ❌           | Multiple         
-     Maximum  | 2                        | 511          | ❌           | ❌          | ❌           | Stump + Multiple 
+		 **Maximum** mode provides substantial config-strings space useful for user scripts that
+		 use many text element strings, however adversely removes default gametype text element 
+		 **label** strings (e.g. +100 kill) and doesn't support round-based gametypes, hardpoint, 
+		 and ``fast_restart``, making it only appropriate for specific cases like non-round-based 
+		 **custom gamemodes**.
 
-     **Maximum** mode provides substantial config-strings space useful for user scripts that
-     use many text element strings, however adversely removes default gametype text element 
-     **label** strings (e.g. +100 kill) and doesn't support round-based gametypes, hardpoint, 
-     and ``fast_restart``, making it only appropriate for specific cases like non-round-based 
-     **custom gamemodes**.
+	7. <sup>***(optional)***</sup> **Set** adjusted stump string if established by user maps/mods 
+		 by inserting the following code at the top of ``main()`` for pertaining parent scripts: 
 
-  7. <sup>***(optional)***</sup> **Set** adjusted stump string if established by user maps/mods 
-     by inserting the following code at the top of ``main()`` for pertaining parent scripts: 
-
-     ```c
-     main()
-     {
-         level.ttext_mode = 2;
-         level.ttext_stump = "stump";
-     }
-     ```
-     Replace ``"stump"`` with adjusted stump string.
+		 ```c
+		 main()
+		 {
+				 level.ttext_mode = 2;
+				 level.ttext_stump = "stump";
+		 }
+		 ```
+		 Replace ``"stump"`` with adjusted stump string.
 
 ## Notice
 
@@ -207,7 +207,7 @@ Note ``.label`` is also unable to be cleared.
 ``136`` average children ``((24 elems × 1 player × 3 children) + 63 tdm strings + 1 anchors)``  
 ``3864`` max children ``((62 elems × 18 players × 3 children) + 511 strings + 5 anchors)``
 
-- Text elements must never be created before ``TText_Setup()`` has executed.
+- Text elements must never be created before ``TText_Init()`` has executed.
 
 - ``level.ttext_mode`` must never be modified outside of ``main()``.
 
@@ -216,74 +216,71 @@ Note ``.label`` is also unable to be cleared.
 - Flicker from string clearing routine can be eliminated by using **minimum** mode.
 
 - String patch scripts like ``maps\mp\gametypes\_rank.gsc`` which increase config-strings
-  space can be effectively replaced using **maximum** mode.
+	space can be effectively replaced using **maximum** mode.
 
 - Players with hitching or network lag are susceptible to **reliable command overflow**
-  (both local and server) due to being unable to "acknowledge" queued reliable commands in 
-  time. This occurs particularly with window switching and high CPU load.
+	(both local and server) due to being unable to "acknowledge" queued reliable commands in 
+	time. This occurs particularly with window switching and high CPU load.
 
 - T4 text element strings set within first ~6x frames on first match can incur 
-  *reliable command cycle-out*.
+	*reliable command cycle-out*.
 
 - T4MP user maps/mods which shift first perk in ``statstable.csv`` break **maximum** mode
-  unless ``level.ttext_stump`` is otherwise provided.
+	unless ``level.ttext_stump`` is otherwise provided.
 
 - T4ZM/T5ZM user maps/mods which shift first weapon in ``statstable.csv`` breaks **maximum** mode
-  unless ``level.ttext_stump`` is otherwise provided.
+	unless ``level.ttext_stump`` is otherwise provided.
 
 ## Details
 
 - The **cause** behind the infamous *"string overflow"* error that pervades older Call of Duty
-  mods is ***user scripts*** that obliviously execute code which **unsystematically** push 
-  strings to an internal **"config-strings"** array (separate from string literals/variables) 
-  that is vulnerable to overflow without planned management.
+	mods is ***user scripts*** that obliviously execute code which **unsystematically** push 
+	strings to an internal **"config-strings"** array (separate from string literals/variables) 
+	that is vulnerable to overflow without planned management.
 
-  The **CS_LOCALIZED_STRINGS** segment of said array is particularly vulnerable being that it is
-  affected by common essential functions: ``settext()``, ``.label =``, which this product 
-  focuses on managing.
+	The **CS_LOCALIZED_STRINGS** segment of said array is particularly vulnerable being that it is
+	affected by common essential functions: ``settext()``, ``.label =``, which this product 
+	focuses on managing.
 
 - The solution provided in this product:
 
-  1. Text element methods are replaced with **guard functions** that superficially evaluate 
-     when CS_LOCALIZED_STRINGS nears capacity and invoke **``clearalltextafterhudelem()``**
-     to clear strings from said segment before overflow can occur.
+	1. Text element methods are replaced with **guard functions** that superficially evaluate 
+		 when CS_LOCALIZED_STRINGS nears capacity and invoke **``clearalltextafterhudelem()``**
+		 to clear strings from said segment before overflow can occur.
 
-  2. Text element strings are each stored in a **child variable** ``.string`` of their parent text
-     to be **reapplied** when CS_LOCALIZED_STRINGS is cleared, and in a **global array** for 
-     counting "unique" strings to track overflow.
+	2. Text element strings are each stored in a **child variable** ``.string`` of their parent text
+		 to be **reapplied** when CS_LOCALIZED_STRINGS is cleared, and in a **global array** for 
+		 counting "unique" strings to track overflow.
 
-     The total strings reapplied at a time is **assumed** to be always less than the available 
-     space in CS_LOCALIZED_STRINGS, assured by: visible-only string reapplication, player mutual
-     strings, render limit constraints (62), and the nature of typical UI paging designs.
-     Cases in which said supposition can fail are when many players each render many text elements 
-     with unique strings.  
-     E.g. ``18x players x 62 strings/elements = 1116``
+		 The total strings reapplied at a time is **assumed** to be always less than the available 
+		 space in CS_LOCALIZED_STRINGS, assured by: visible-only string reapplication, player mutual
+		 strings, render limit constraints (62), and the nature of typical UI paging designs.
+		 Cases in which said supposition can fail are when many players each render many text elements 
+		 with unique strings.  
+		 E.g. ``18x players x 62 strings/elements = 1116``
 
-  3. **Anchor** strings are pushed to CS_LOCALIZED_STRINGS every ``100`` entries to enable 
-     sequentially clearing (backwards) past the ``129`` limit that 
-     **``clearalltextafterhudelem()``** imposes where it's set to clear ``(510 - string_index)`` 
-     but is ultimately limited by each cleared string invoking a  **reliable server command** 
-     which when exceeding ``129`` in a single server frame results in the error: 
-     ``CL_CGameNeedsServerCommand: A reliable command was cycled out``.
+	3. **Anchor** strings are pushed to CS_LOCALIZED_STRINGS every ``100`` entries to enable 
+		 sequentially clearing (backwards) past the ``129`` limit that 
+		 **``clearalltextafterhudelem()``** imposes where it's set to clear ``(510 - string_index)`` 
+		 but is ultimately limited by each cleared string invoking a  **reliable server command** 
+		 which when exceeding ``129`` in a single server frame results in the error: 
+		 ``CL_CGameNeedsServerCommand: A reliable command was cycled out``.
 
-  4. Config-strings are cleared before each round switch to prevent subsequent overflow when 
-     string counters reset.
+	4. Config-strings are cleared before each round switch to prevent subsequent overflow when 
+		 string counters reset.
 
 ---
 
 - **Round Switch** is only supported for **minimum** and **moderate** mode as game script 
-  config-strings repopulate on match start (despite any prior clearing) which **cannot** be 
-  cleared in time before overflow when using **maximum** mode due to its stump clearing incurring 
-  *reliable command cycle-out* from exceeding ``129`` in a single frame.
+	config-strings repopulate on match start (despite any prior clearing) which **cannot** be 
+	cleared in time before overflow when using **maximum** mode due to its stump clearing incurring 
+	*reliable command cycle-out* from exceeding ``129`` in a single frame.
 
 - **Fast Restart** is only supported for **minimum** mode as config-strings persist across 
-  matches which cannot be preemptively cleared for ``fast_restart`` and  thus require clearing 
-  on subsequent match start in first few frames to prevent overflow, of which 
-  **moderate**/**maximum** mode's usage of multiple anchors otherwise inhibits due to incurring 
-  *reliable command cycle-out* from exceeding ``129`` in a single frame (unlike ``map_restart``).
-
-- **Auto-archiving** of text elements is applied to enable rendering ``62`` maximum UI elements 
-  simultaneously when archiving is otherwise unutilized.
+	matches which cannot be preemptively cleared for ``fast_restart`` and  thus require clearing 
+	on subsequent match start in first few frames to prevent overflow, of which 
+	**moderate**/**maximum** mode's usage of multiple anchors otherwise inhibits due to incurring 
+	*reliable command cycle-out* from exceeding ``129`` in a single frame (unlike ``map_restart``).
 
 ---
 
@@ -296,7 +293,7 @@ Note ``.label`` is also unable to be cleared.
 - CS_LOCALIZED_STRINGS limit is ``511``.
 
 - Config-strings character limit is ``65535`` with available space being ``~41595``.   
-  Exceeding this limit incurs the error: ``MAX_GAMESTAT_CHARS exceeded``.
+	Exceeding this limit incurs the error: ``MAX_GAMESTAT_CHARS exceeded``.
 
 - Text element character limit is ``255``.
 
@@ -304,44 +301,48 @@ Note ``.label`` is also unable to be cleared.
 
 - String variable character limit is ``8191``.
 
-- UI element render limit is ``62`` (``31`` archived, ``31`` unarchived, per player including level elements)
+- UI element render limit is ``62`` (``31`` archived, ``31`` unarchived, per player including 
+	level elements)
 
-  T6MP has 6x slots preoccupied which can be removed using:\
-  ``scripts\mp\cl\cjl_core::SessionOUI_Delete()``.
+	T6MP has 6x slots preoccupied which can be removed using:\
+	``scripts\mp\cl\cjl_core::SessionOUI_Delete()``.
 
-  Waypoints don't contribute.
+	Waypoints don't contribute.
+
+- Player UI elements are automatically undefined whenever said player disconnects but does not 
+	decrement or shuffle parent arrays where it is referenced (residue).
 
 - Reliable command limit per server frame is ``128``.
 
 - Reliable commands queued past ``64`` per server frame are subject to eviction and 
-  forward-substitution based on command type priority. Variance of this behavior forces
-  usage of an approximated clear threshold (``level.tstrings_clear_cap``).
+	forward-substitution based on command type priority. Variance of this behavior forces
+	usage of an approximated clear threshold (``level.tstrings_clear_cap``).
 
-  T6 config-string commands are particularly substituted more aggressively than previous games 
-  (evident in engine code), enabling a stable clear threshold of ``~100`` as opposed to ``~60`` 
-  used for T5/T4. Note T6 config-string command ID is ``2`` whilst T5 is ``C``/``d``.
+	T6 config-string commands are particularly substituted more aggressively than previous games 
+	(evident in engine code), enabling a stable clear threshold of ``~100`` as opposed to ``~60`` 
+	used for T5/T4. Note T6 config-string command ID is ``2`` whilst T5 is ``C``/``d``.
 
 - Config-strings are stored both server and client-side.
 
 ---
 
 - Various platforms, gametypes, and maps push varying load-time (**``configstrings.csv``**) and 
-  run-time (``mas\mp\gametypes\*.gsc``) strings to config-strings array which requires 
-  accounting for.  
-  e.g. T6MP TDM has: ``448/511 (63)`` whilst One Flag CTF has: ``477/511 (34)``.
+	run-time (``mas\mp\gametypes\*.gsc``) strings to config-strings array which requires 
+	accounting for.  
+	e.g. T6MP TDM has: ``448/511 (63)`` whilst One Flag CTF has: ``477/511 (34)``.
 
 - ``"MP_HALFTIME"`` is always the first config-string (T6MP/ZM).
 
 - ``timescale`` increases can incur **reliable command overflow**. This can be accounted for by
-  **dividing** ``level.ttext_clear_cap`` by ``timescale``. Note this can't be automated as 
-  existing anchors can't be adjusted.
+	**dividing** ``level.ttext_clear_cap`` by ``timescale``. Note this can't be automated as 
+	existing anchors can't be adjusted.
 
 - ``setvalue()`` doesn't push to config-strings.
 
 - ``configstrings`` command can be used to view contents of config-strings array.
 
 - Localized strings (``&``) used with ``settext()`` are pushed to config-strings regardless of 
-  whether they are precached (``precachestring()``) or previously cleared.
+	whether they are precached (``precachestring()``) or previously cleared.
 
 - Map switch clears config-strings.
 
@@ -353,7 +354,7 @@ Note ``.label`` is also unable to be cleared.
 <summary>Click to expand</summary>
 
 - Various config-strings segments are subject to overflow beyond just CS_LOCALIZED_STRINGS, 
-  however less common. See table bellow.
+	however less common. See table bellow.
 
 Segment                   | Index | Size    | Influencers                      | Note
 --------------------------|-------|---------|----------------------------------|-----------------
@@ -423,26 +424,29 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
 ## Design Notes
 
 - Invisible text elements (``.alpha = 0``) are excluded from string reapplication to preserve 
-  config-string space.
+	config-string space.
 
 - Anchors are recycled from existing config-strings instead of pushing dedicated strings as to 
-  relieve slight additional config-strings space.
+	relieve slight additional config-strings space.
 
 - Stump ``"MP_HALFTIME"`` is used as first anchor when **maximum** mode is enabled to relieve 
-  slight additional config-strings space.
+	slight additional config-strings space.
 
 - ``level.ttext_mode`` is intended for setting via ``main()`` as to take precedence when 
-  multiple user scripts execute ``TText_Setup()`` in nondeterministic order and prevent 
-  modification after ``TText_Setup()`` which otherwise causes the game to crash.
+	multiple user scripts execute ``TText_Init()`` in nondeterministic order and prevent 
+	modification after ``TText_Init()`` which otherwise causes the game to crash.
 
-- CS_LOCALIZED_STRINGS is never cleared immediately before map switch as the latter action invokes 
-  ``~5`` reliable server commands itself which together can incur *reliable command cycle-out*.
+- Residual player element entries are routinely removed in case they weren't deleted on
+	disconnect.
+
+- CS_LOCALIZED_STRINGS is never cleared immediately before map switch as the latter action 
+	invokes ``~5`` reliable server commands itself which together can incur *reliable command cycle-out*.
 
 - ``G_LocalizedStringIndex()`` is the internal function responsible for emitting string overflow 
-  errors from ``settext()``/``.label``.
+	errors from ``settext()``/``.label``.
 
 - ``SV_AddServerCommand()``, ``CL_CGameNeedsServerCommand()``, ``SV_ProcessClientCommands()``, 
-  are the internal functions responsible for emitting reliable command errors.
+	are the internal functions responsible for emitting reliable command errors.
 
 - ``clearlocalizedstrings()`` is SP only.
 
@@ -453,36 +457,39 @@ Empty influencer fields are affected by ``configstrings.csv`` only.
 - ``LUA::settext()`` doesn't affect config-strings.
 
 - ``settext()`` second parameter used for appendages is ignored as string concatenation can
-  be used instead.
+	be used instead.
 
 - UI element archiving (``.archived``) is primarily intended for toggling spectated player
-  element visibility during killcam/spectator/codcaster and visibility to owner during killcam
-  but can be coordinated to render ``62`` simultaneous elements as both states occupy separate 
-  pools.
+	element visibility during killcam/spectator/codcaster and visibility to owner during killcam
+	but can be coordinated to render ``62`` simultaneous elements as both states occupy separate 
+	pools.
 
-  ``.archived = true``\: ✅ Spectators ❌ Owner  
-  ``.archived = false``: ✅ Owner      ❌ Spectators
+	``.archived = true``\: ✅ Spectators ❌ Owner  
+	``.archived = false``: ✅ Owner      ❌ Spectators
+
+- Auto-archiving code (e.g. ``cjl_ui``) can be used to coordinate rendering ``62`` maximum UI 
+	elements simultaneously when archiving is otherwise unutilized.
 
 - Mismatching text element strings is caused by unorderly reapplication of strings in which
-  they continue to point to the same config-strings index after being replaced by a different 
-  string.
+	they continue to point to the same config-strings index after being replaced by a different 
+	string.
 
 - T5ZM ``level.chalk_hud2`` text element is deleted as it otherwise brokenly appears when 
-  clearing config-strings due to being pushed shortly after first anchor is established.
+	clearing config-strings due to being pushed shortly after first anchor is established.
 
 - MP and ZM script variants are provided due to varying string limits, game script functions,
-  and for maximum compactness.
+	and for maximum compactness.
 
 - Note previous "string overflow fix" scripts used gratuitous polling threads for counting
-  strings which has been replaced here with an improved *"inline evaluation"* paradigm.
+	strings which has been replaced here with an improved *"inline evaluation"* paradigm.
 
 - Idea of otherwise having maximum/moderate mode support fast restart by clearing anchors across 
-  frames on match start is infeasible as it takes too long to complete before text elements are 
-  created. E.g. ``(1023 / 60) = 18 frames``.
+	frames on match start is infeasible as it takes too long to complete before text elements are 
+	created. E.g. ``(1023 / 60) = 18 frames``.
 
 - Idea of otherwise using ``autoexec`` calling convention to alleviate user scripts from calling 
-  ``TText_Setup()`` is infeasible as such breaks backwards compatibility with clients/games 
-  which don't support said feature.
+	``TText_Init()`` is infeasible as such breaks backwards compatibility with clients/games 
+	which don't support said feature.
 
 - Script is library independent.
 

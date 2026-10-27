@@ -19,7 +19,7 @@
 //██▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 //▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
-TText_Setup()
+TText_Init()
 {
 	if (isdefined(level.ttexts)) //Prevents re-invocation.
 		return;
@@ -117,21 +117,42 @@ TText_Evaluate(string)
 		level.tstrings[level.tanchors[0]] = true; //Preserve first anchor string.
 		_DebugPrint("[cjl_ttext]: Reapply strings");
 
-		for (i = 0; i < level.ttexts.size; i ++)
+		for (i = (level.ttexts.size - 1); i >= 0; i --) //Reverse traverse is required for residue cleanup.
 		{
-			text = level.ttexts[i];
 			_AssertX((level.tstrings.size < level.tstrings_cap), ("CJL - Too many concurrent tstrings: " + level.tstrings.size)); //Exit if reapplied strings exceed limit.
+			text = level.ttexts[i];
 
-			if (text.alpha > 0 && isdefined(text.string)) //Visible text only.
+			if (!isdefined(text)) //Remove residual player elements that weren't deleted on disconnect.
 			{
-				if ((level.tstrings.size % level.tstrings_clear_cap) == 0 && !_Array_Contains(level.tanchors, text.string)) //Recreate anchors and guard duplicates.
-					CSAnchor_Push(text.string);
-				if (TTextLabel_Get(text) != 0) //Label strings.
-					text.label = text.string;
-				else //Text strings.
-					text SetText(text.string);
+				eidx = (level.ttexts.size - 1);
+				level.ttexts[i] = level.ttexts[eidx]; //Remove-swap.
+				if (i != eidx) level.ttexts[i].idx = i;
+				level.ttexts[eidx] = undefined; //Decrements array.size.
+				continue;
+			}
+			if (text.alpha > 0 && (isdefined(text.string) || isdefined(text.label_string))) //Visible text only.
+			{
+				t0 = 0;
 
-				level.tstrings[text.string] = true;
+				if (isdefined(text.string))
+					t0 = text.string;
+				else
+					t0 = text.label_string;
+
+				string = t0;
+
+				if ((level.tstrings.size % level.tstrings_clear_cap) == 0 && !_Array_Contains(level.tanchors, string)) //Recreate anchors and guard duplicates.
+					CSAnchor_Push(string);
+				if (isdefined(text.string)) //Text strings.
+				{
+					text SetText(string);
+					level.tstrings[string] = true;
+				}
+				else //Label strings.
+				{
+					text.label = text.label_tidx;
+					level.tstrings[string] = true;
+				}
 			}
 		}
 	}
@@ -151,18 +172,6 @@ TText_Evaluate(string)
 
 TText_Create(text)
 {
-	if (isdefined(text.owner))
-	{
-		if (!isdefined(text.owner.ui_acount)) text.owner.ui_acount = 0;
-		text.archived = (text.archived && ((text.owner.ui_acount + level.ui_acount) < 31));
-    	if (text.archived) text.owner.ui_acount ++;
-	}
-    else
-    {
-    	text.archived = (text.archived && level.ui_acount < 31);
-    	if (text.archived) level.ui_acount ++;
-	}
-
 	//#ifdef PL && (T6 || T5 || T4)
 	//if (1) return;
 	//#endif
@@ -170,32 +179,14 @@ TText_Create(text)
 	level.ttexts[level.ttexts.size] = text;
 }
 	/**<************************************************************
-	   - Auto-archiving factors both level and player elements
-	     sharing same archive pools and fills "archived"
-	     pool first before overflow into "unarchived" pool.
-	     Elements already set to "unarchived" are ignored.
-	     OC elements are excluded from archive count.
 	   - .idx naming is used instead of .index to prevent conflict
-	     with OC scripts that use the latter.
-	   - Idea of invoking TText_Setup() here is infeasible as such
+		 with OC scripts that use the latter.
+	   - Idea of invoking TText_Init() here is infeasible as such
 		 MUST be invoked on first server frame.
 	 ***************************************************************/
 
 TText_Delete(text)
 {
-	if (!isdefined(text.idx)) //Skip if not tweak-text.
-	{
-		text Destroy();
-		return;
-	}
-	if (text.archived)
-	{
-		if (isdefined(text.owner))
-			text.owner.ui_acount --;
-		else
-			level.ui_acount --;
-	}
-
 	//#ifdef PL && (T6 || T5 || T4)
 	//if (1) return;
 	//#endif
@@ -207,17 +198,18 @@ TText_Delete(text)
 }
 	/**<************************************************************
 		- Remove-swap method is faster than ArrayRemoveIndex().
+		- Player elements should be deleted on disconnect.
 	 ***************************************************************/
 
 TText_Set(text, string)
 {
 	_AssertX(isdefined(string), "CJL - Undefined string.");
 	_AssertX((string.size < 256), "CJL - Exceeded text character limit: " + string.size + "/255.");
-	text.string = string; //Store preserved copy of string.
 	//#ifdef PL && (T6 || T5 || T4)
 	//text SetTextUnlimited(string);
 	//if (1) return;
 	//#endif
+	text.string = string; //Store copy of string to reapply.
 	TText_Evaluate(string);
 	text SetText(string);
 	level.tstrings[string] = true;
@@ -254,30 +246,22 @@ TTextNumber_Set(text, number)
 
 TTextLabel_Set(text, string, string_tidx)
 {
-	//#ifdef PL && (T6 || T5 || T4)
-	//#else
+	_AssertX(isdefined(string), "CJL - Undefined string.");
+	_AssertX((string.size < 256), "CJL - Exceeded text character limit: " + string.size + "/255.");
 	TText_Evaluate(string);
-	level.tstrings[string] = true;
-	//#endif
+	text.label_string = string; //Store copy of string to reapply.
+	text.label_tidx = string_tidx; //istring() doesn't exist in T4.
 	text.label = string_tidx;
+	level.tstrings[string] = true;
 }
 	/**<************************************************************
 		- .label must be a localized string, of which can be
 		  specified either using "&" prefix or istring() cast.
-		- Note localized strings cannot be used as array keys or
-		  concatenated.
-	 ***************************************************************/
-
-TTextLabel_Get(text)
-{
-	return text.label;
-}
-	/**<************************************************************
-		- .label is zero by default in T4/5/6 and undefined in
-		  IW3/4/5.
-		- Variable fields are evaluated before being passed to
-		  functions in IW3/4/5 and thus cannot be checked with
-		  IsDefined() without a run-time error.
+		- .label is write only in IW3/4/5.
+		- .label is 0 by default and resets to 0 after clearing.
+		- .label_string is required to index level.tstrings as
+		  localized string indexes cannot be used as array keys
+		  or concatenated.
 	 ***************************************************************/
 
 TTextLabelNumber_Set(text, number)
@@ -302,9 +286,9 @@ TTextAlpha_Set(text, alpha)
 		- Invisible text elements (.alpha = 0) are excluded from
 		  string application and thus are reapplied here when
 		  set visible again.
-	    - Labels are excluded from string reapplication.
-	    - .label is always 0 in T4/5/6 for run-time strings.
-	    - .string is undefined when TextNumber_Set() is only used.
+		- Labels are excluded from string reapplication.
+		- .label is always 0 in T4/5/6 for run-time strings.
+		- .string is undefined when TextNumber_Set() is only used.
 	 ***************************************************************/
 
 
@@ -452,7 +436,7 @@ CSAnchor_Pops()
 	/**<************************************************************
 		- Pushes arbitrary string to config-strings.
 		- String is omitted from tstrings array as usage of
-	      localized strings corrupts key arrays.
+		  localized strings corrupts key arrays.
 	 ***************************************************************/
 
 //▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
@@ -485,33 +469,33 @@ _Array_Contains(array, value)
 	__keys0 = getarraykeys(__items0);
 	for (__i0 = 0; __i0 < __keys0.size; __i0 ++) {
 	    item = __items0[__keys0[(__keys0.size - 1 - __i0)]];
-        if (item == value)
-            return true;
-    }
+		if (item == value)
+			return true;
+	}
 
 	return false;
 }
 
 _Session_IsForceEnded()
 {
-    return (level.forcedend || (level.hostforcedend && !maps\mp\gametypes\_globallogic::HostIdledOut()));
+	return (level.forcedend || (level.hostforcedend && !maps\mp\gametypes\_globallogic::HostIdledOut()));
 }
 
 _Session_IsRoundBased()
 {
-    return (isdefined(level.roundlimit) && (level.roundlimit != 1)); //Works for ZM too.
+	return (isdefined(level.roundlimit) && (level.roundlimit != 1)); //Works for ZM too.
 }
 
 _RoundCount_Get()
 {
-    t0 = 0;
+	t0 = 0;
 
-    if (isdefined(level.roundlimit))
-    	t0 = level.roundlimit;
-    else
-    	t0 = 0;
+	if (isdefined(level.roundlimit))
+		t0 = level.roundlimit;
+	else
+		t0 = 0;
 
-    return (t0);
+	return (t0);
 }
 
 _Round_WasLast()
@@ -543,10 +527,10 @@ CSOverflow_Test()
 	else
 		SetDvar("scr_" + GetDvar("g_gametype") + "_timelimit", 0);
 
-	TText_Setup();
+	TText_Init();
 	if (level.players.size == 0) level waittill("connected"); //Prevents reliable command cycle-out.
 	texts = [];
-	n = 30; //n text elements.
+	n = 4; //n text elements.
 
 	for (i = 0; i < n; i ++)
 	{
